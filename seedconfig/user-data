@@ -1,0 +1,17 @@
+#cloud-config
+#vim:syntax=yaml
+users:
+# A user by the name `ec2-user` is created in the image by default.
+  - default
+# The following entry creates user1 and assigns a plain text password.
+# Please note Security best practises recommend not using plain text password.
+  - name: devuser
+    gecos: devuser with plain passwd configured and sudo nopasswd enabled
+    groups: sudo
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    plain_text_passwd: devuser-password
+    lock_passwd: false
+chpasswd:
+  list: |
+    ec2-user:ec2-user-password
+# In the above line, do not add any spaces after 'ec2-user:'.
